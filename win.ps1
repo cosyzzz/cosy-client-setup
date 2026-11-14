@@ -414,7 +414,7 @@ if ((-not $Force) -and (-not $VerifyOnly) -and (-not $DryRun) -and $installed.In
     $cmp = Compare-ClientVersion $installed.Version $chosenVer
     if ($cmp -ge 0) {
         Write-Log "[OK] Machine already has the latest client ($($installed.Version)) running. Use -Force to reinstall." "Green"
-        exit 0
+        if ($PSCommandPath) { exit 0 } else { $global:LASTEXITCODE = 0; return }
     } else {
         Write-Log "[UPGRADE] Older version detected ($($installed.Version) -> $chosenVer). Mandatory upgrade starting..." "Yellow"
     }
@@ -422,7 +422,7 @@ if ((-not $Force) -and (-not $VerifyOnly) -and (-not $DryRun) -and $installed.In
 
 if ($DryRun) {
     Write-Log "[DRY-RUN] Would download $chosenUrl (expected SHA256: $chosenSha) and install version $chosenVer for $WsUrl." "Cyan"
-    exit 0
+    if ($PSCommandPath) { exit 0 } else { $global:LASTEXITCODE = 0; return }
 }
 
 # [4/5] Download & Verify SHA-256
@@ -459,7 +459,7 @@ try {
             exit $p.ExitCode
         }
         Write-Log "[OK] E2E verification passed (Latest=$chosenVer, SHA256 OK, --selftest OK)." "Green"
-        exit 0
+        if ($PSCommandPath) { exit 0 } else { $global:LASTEXITCODE = 0; return }
     }
 
     # [5/5] Install / Force Upgrade via CPInstall.exe

@@ -293,6 +293,7 @@ if [ -z "$BUILT_BIN" ]; then
     if [ -d "${TMP_DIR}/src/Client-Linux" ]; then
         SRC_ROOT="${TMP_DIR}/src/Client-Linux"
     fi
+    sed -i 's/\r$//' "${SRC_ROOT}/build.sh" "${SRC_ROOT}/CMakeLists.txt" 2>/dev/null || true
     if [ "$VERBOSE" -eq 1 ]; then
         bash "${SRC_ROOT}/build.sh"
     else
