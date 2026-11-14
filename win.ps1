@@ -1,14 +1,5 @@
-﻿<#
-.SYNOPSIS
-    Cosy Classroom System — Universal Windows Client Installer (Mandatory Latest Edition)
-.DESCRIPTION
-    Compatible with:
-      - Windows 7 / 8 / 8.1 / 10 / 11 / Windows Server 2012-2025 (x64 & ARM64 via emulation)
-      - Windows PowerShell 5.1+, PowerShell 7+, ExecutionPolicy Restricted (via irm | iex)
-      - Interactive User (auto-UAC elevation), Administrator, NT AUTHORITY\SYSTEM, GPO/Intune/LAN
-      - Offline/Proxied/Restricted environments (5-tier download fallback + GitHub Release fallback)
-    Always enforces installation/upgrade to the strictly LATEST verified client build.
-#>
+# Cosy Classroom System -- Universal Windows Client Installer (Mandatory Latest Edition)
+# Compatible with Windows 7/8/10/11/Server (x64 & ARM64), PS 5.1+, PS 7+, irm | iex
 [CmdletBinding()]
 param(
     [string]$ServerUrl = "",
