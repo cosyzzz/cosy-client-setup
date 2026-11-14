@@ -1,0 +1,22 @@
+{
+    "version":  "2.4.2611150650",
+    "source_commit":  "f1e0469",
+    "released_at_utc":  "2026-11-14T23:55:59Z",
+    "default_server":  "https://sykids.dpdns.org",
+    "windows":  {
+                    "cpinstall_url":  "https://github.com/cosyzzz/cosy-client-setup/releases/latest/download/CPInstall.exe",
+                    "cpinstall_sha256":  "26e1d0fde34071d01532c39f822a3b938fb60e0cab5599ab6991f958fa72f1dd",
+                    "cpinstall_size":  2758656,
+                    "sysoftware_setup_url":  "https://github.com/cosyzzz/cosy-client-setup/releases/latest/download/SySoftwareSetup.exe",
+                    "sysoftware_setup_sha256":  "26e1d0fde34071d01532c39f822a3b938fb60e0cab5599ab6991f958fa72f1dd",
+                    "cpuninstall_url":  "https://github.com/cosyzzz/cosy-client-setup/releases/latest/download/CPUninstall.exe",
+                    "cpuninstall_sha256":  "2ec1b0fce88000a12f860e4c9efa3baae397bc72027ed284e7a53f022fb79479"
+                },
+    "linux":  {
+                  "src_url":  "https://github.com/cosyzzz/cosy-client-setup/releases/latest/download/Client-Linux-src.tar.gz",
+                  "src_sha256":  "322069d6d5a0c444f90391dfc36117a43877aa1c01a0f23362c1314299dc2cdf",
+                  "binaries":  {
+
+                               }
+              }
+}

@@ -1,0 +1,61 @@
+name: Build Linux Client Release Assets
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Release tag to attach cp-client binaries to (defaults to latest release)'
+        required: false
+        default: ''
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  build-linux:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-22.04
+            arch: amd64
+          - os: ubuntu-22.04-arm
+            arch: arm64
+    runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.arch == 'arm64' }}
+    steps:
+      - name: Checkout setup repo
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake pkg-config libssl-dev libx11-dev
+
+      - name: Download Client-Linux-src.tar.gz from latest release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${{ github.event.inputs.tag_name }}"
+          if [ -z "$TAG" ]; then
+            TAG=$(gh release view --json tagName -q .tagName)
+          fi
+          echo "RELEASE_TAG=$TAG" >> "$GITHUB_ENV"
+          gh release download "$TAG" -p "Client-Linux-src.tar.gz" -D /tmp/src
+
+      - name: Compile cp-client (${{ matrix.arch }})
+        run: |
+          mkdir -p /tmp/build-src
+          tar -xzf /tmp/src/Client-Linux-src.tar.gz -C /tmp/build-src
+          SRC_DIR="/tmp/build-src"
+          [ -d "/tmp/build-src/Client-Linux" ] && SRC_DIR="/tmp/build-src/Client-Linux"
+          bash "$SRC_DIR/build.sh"
+          cp "$SRC_DIR/build/cp-client" "/tmp/cp-client-linux-${{ matrix.arch }}"
+          sha256sum "/tmp/cp-client-linux-${{ matrix.arch }}" > "/tmp/cp-client-linux-${{ matrix.arch }}.sha256"
+
+      - name: Upload binary to Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload "$RELEASE_TAG" "/tmp/cp-client-linux-${{ matrix.arch }}" "/tmp/cp-client-linux-${{ matrix.arch }}.sha256" --clobber
