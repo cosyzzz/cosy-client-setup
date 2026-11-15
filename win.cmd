@@ -133,9 +133,10 @@ where powershell.exe >nul 2>&1
 if %errorlevel% equ 0 (
     powershell -NoProfile -ExecutionPolicy Bypass -Command ^
       "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; " ^
+      "$wc = New-Object Net.WebClient; $wc.Encoding = [Text.Encoding]::UTF8; $wc.Headers['User-Agent'] = 'CosySetup/1.0'; " ^
       "$gh = $null; $srv = $null; " ^
-      "try { $gh = (Invoke-WebRequest '%REL_BASE%/version.json' -UseBasicParsing -TimeoutSec 10).Content | ConvertFrom-Json } catch { try { $gh = (Invoke-WebRequest '%RAW_BASE%/version.json' -UseBasicParsing -TimeoutSec 10).Content | ConvertFrom-Json } catch {} }; " ^
-      "if ('%SOURCE_MODE%' -ne 'github') { try { $srv = (Invoke-WebRequest '%SERVER_URL%/update?client&check=1' -UseBasicParsing -TimeoutSec 8).Content | ConvertFrom-Json } catch {} }; " ^
+      "try { $gh = $wc.DownloadString('%REL_BASE%/version.json') | ConvertFrom-Json } catch { try { $gh = $wc.DownloadString('%RAW_BASE%/version.json') | ConvertFrom-Json } catch {} }; " ^
+      "if ('%SOURCE_MODE%' -ne 'github') { try { $srv = $wc.DownloadString('%SERVER_URL%/update?client&check=1') | ConvertFrom-Json } catch {} }; " ^
       "$url='%REL_BASE%/CPInstall.exe'; $sha=''; $ver='0.0.0'; " ^
       "if ($gh -and $gh.windows) { $ver=[string]$gh.version; $sha=[string]$gh.windows.cpinstall_sha256; if ($gh.windows.cpinstall_url) { $url=[string]$gh.windows.cpinstall_url } }; " ^
       "if ($srv -and $srv.available) { " ^
