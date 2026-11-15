@@ -1,5 +1,6 @@
 ﻿# Cosy Classroom System -- Universal Windows Client Installer (Mandatory Latest Edition)
 # Compatible with Windows 7/8/10/11/Server (x64 & ARM64), PS 5.1+, PS 7+, irm | iex
+& {
 [CmdletBinding()]
 param(
     [string]$ServerUrl = "",
@@ -499,3 +500,4 @@ try {
 } finally {
     Remove-Item -LiteralPath $workDir -Recurse -Force -ErrorAction SilentlyContinue
 }
+} @args
