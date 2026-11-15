@@ -1,4 +1,4 @@
-﻿# Cosy Classroom System -- Universal Windows Client Installer (Mandatory Latest Edition)
+# Cosy Classroom System -- Universal Windows Client Installer (Mandatory Latest Edition)
 # Compatible with Windows 7/8/10/11/Server (x64 & ARM64), PS 5.1+, PS 7+, irm | iex
 & {
 [CmdletBinding()]
@@ -323,7 +323,7 @@ if ((-not $isAdmin) -and (-not $VerifyOnly) -and (-not $DryRun)) {
 }
 
 Write-Log "============================================================================" "Cyan"
-Write-Log "  Cosy Classroom System — Universal Windows Installer ($arch)" "Cyan"
+Write-Log "  Cosy Classroom System -- Universal Windows Installer ($arch)" "Cyan"
 Write-Log "============================================================================" "Cyan"
 
 # [1/5] Resolve Server URL
@@ -495,7 +495,7 @@ try {
         Write-Log "[OK] Cosy System v$chosenVer installed and running (cpsv / cpwg / cp-ag)." "Green"
         Write-Log "     Dashboard: $ServerUrl/" "Cyan"
     } else {
-        Write-Log "[WARN] Installer completed (exit 0) — verify service with: sc.exe query cpsv" "Yellow"
+        Write-Log "[WARN] Installer completed (exit 0) -- verify service with: sc.exe query cpsv" "Yellow"
     }
 } finally {
     Remove-Item -LiteralPath $workDir -Recurse -Force -ErrorAction SilentlyContinue

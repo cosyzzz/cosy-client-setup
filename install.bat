@@ -1,6 +1,6 @@
 @echo off
 setlocal EnableExtensions
-title Cosy Classroom System — One-Click Client Installer
+title Cosy Classroom System -- One-Click Client Installer
 
 :: Auto-elevate UAC when double-clicked
 net session >nul 2>&1

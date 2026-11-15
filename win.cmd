@@ -2,7 +2,7 @@
 setlocal EnableExtensions EnableDelayedExpansion
 
 :: ============================================================================
-:: Cosy Classroom System — Universal Windows CMD Bootstrap (Mandatory Latest)
+:: Cosy Classroom System -- Universal Windows CMD Bootstrap (Mandatory Latest)
 :: Compatible with: Windows 7 / 8 / 10 / 11 / Server 2012-2025 (CMD, GPO, Task)
 :: Download fallbacks: curl.exe -> PowerShell -> bitsadmin -> certutil
 :: ============================================================================
