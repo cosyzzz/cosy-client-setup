@@ -1,4 +1,4 @@
-# Cosy Classroom System -- Universal Windows Client Installer (Mandatory Latest Edition)
+﻿# Cosy Classroom System -- Universal Windows Client Installer (Mandatory Latest Edition)
 # Compatible with Windows 7/8/10/11/Server (x64 & ARM64), PS 5.1+, PS 7+, irm | iex
 [CmdletBinding()]
 param(
@@ -352,8 +352,8 @@ $ghMeta = $null
 $srvMeta = $null
 
 if ($Source -ne "server") {
-    $ghJson = Invoke-DownloadString -Url "$RawBase/version.json" -TimeoutSec 12
-    if (-not $ghJson) { $ghJson = Invoke-DownloadString -Url "$RelBase/version.json" -TimeoutSec 12 }
+    $ghJson = Invoke-DownloadString -Url "$RelBase/version.json" -TimeoutSec 12
+    if (-not $ghJson) { $ghJson = Invoke-DownloadString -Url "$RawBase/version.json" -TimeoutSec 12 }
     if ($ghJson) {
         try { $ghMeta = $ghJson | ConvertFrom-Json } catch {}
     }

@@ -191,7 +191,7 @@ LINUX_BIN_SHA=""
 LINUX_BIN_URL=""
 LINUX_SRC_URL="${REL_BASE}/Client-Linux-src.tar.gz"
 
-if fetch_file "${RAW_BASE}/version.json" "${TMP_DIR}/version.json" 2>/dev/null || fetch_file "${REL_BASE}/version.json" "${TMP_DIR}/version.json" 2>/dev/null; then
+if fetch_file "${REL_BASE}/version.json" "${TMP_DIR}/version.json" 2>/dev/null || fetch_file "${RAW_BASE}/version.json" "${TMP_DIR}/version.json" 2>/dev/null; then
     if command -v python3 >/dev/null 2>&1; then
         eval "$(python3 - "${TMP_DIR}/version.json" "$ARCH" <<'PY'
 import json, sys

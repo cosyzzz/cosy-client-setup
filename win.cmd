@@ -134,7 +134,7 @@ if %errorlevel% equ 0 (
     powershell -NoProfile -ExecutionPolicy Bypass -Command ^
       "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; " ^
       "$gh = $null; $srv = $null; " ^
-      "try { $gh = (Invoke-WebRequest '%RAW_BASE%/version.json' -UseBasicParsing -TimeoutSec 10).Content | ConvertFrom-Json } catch {}; " ^
+      "try { $gh = (Invoke-WebRequest '%REL_BASE%/version.json' -UseBasicParsing -TimeoutSec 10).Content | ConvertFrom-Json } catch { try { $gh = (Invoke-WebRequest '%RAW_BASE%/version.json' -UseBasicParsing -TimeoutSec 10).Content | ConvertFrom-Json } catch {} }; " ^
       "if ('%SOURCE_MODE%' -ne 'github') { try { $srv = (Invoke-WebRequest '%SERVER_URL%/update?client&check=1' -UseBasicParsing -TimeoutSec 8).Content | ConvertFrom-Json } catch {} }; " ^
       "$url='%REL_BASE%/CPInstall.exe'; $sha=''; $ver='0.0.0'; " ^
       "if ($gh -and $gh.windows) { $ver=[string]$gh.version; $sha=[string]$gh.windows.cpinstall_sha256; if ($gh.windows.cpinstall_url) { $url=[string]$gh.windows.cpinstall_url } }; " ^
