@@ -16,7 +16,14 @@
                   "src_url":  "https://github.com/cosyzzz/cosy-client-setup/releases/latest/download/Client-Linux-src.tar.gz",
                   "src_sha256":  "034a5b3a40e8800964e0b33466c07c5051d94dfe712edc1b21d0b87b9763c64b",
                   "binaries":  {
-
+                                   "amd64":  {
+                                                 "url":  "https://github.com/cosyzzz/cosy-client-setup/releases/latest/download/cp-client-linux-amd64",
+                                                 "sha256":  "1b8b55afbae2443fad0b79fb8dadb7e47f5d2fae2c2730ff2009f473d284fdb3"
+                                             },
+                                   "arm64":  {
+                                                 "url":  "https://github.com/cosyzzz/cosy-client-setup/releases/latest/download/cp-client-linux-arm64",
+                                                 "sha256":  "93e2171f58d290c9097180d1860270eb58c2462d3d2f590251f29a62ca1a37ea"
+                                             }
                                }
               }
 }
